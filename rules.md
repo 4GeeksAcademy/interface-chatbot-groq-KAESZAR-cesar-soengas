@@ -1,4 +1,4 @@
-# Hola Asiste! - A partir de ahora:
+# A partir de ahora:
 
 - Trabajaras únicamente en la feature o paso que yo te indique.
 - No adelantarás tareas ni aplicarás el plan completo por tu cuenta.
