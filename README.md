@@ -9,7 +9,7 @@ Enviar mensajes a un modelo real a través de la API de [Groq](https://groq.com/
 ## Requisitos previstos
 
 - Chat para enviar mensajes y recibir respuestas de la IA.
-- Integración con el modelo `qwen/qwen3.6-27b` indicado en el brief.
+- Integración con el modelo `qwen/qwen3.8-27b` de Groq.
 - Indicadores de estado para el envío y manejo de errores de la API o de red.
 - Métricas de tokens por respuesta y acumuladas en la sesión:
 	- tokens del prompt;

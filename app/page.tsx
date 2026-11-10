@@ -9,7 +9,7 @@ type Usage = { promptTokens: number; completionTokens: number; totalTokens: numb
 const starterMessages: Message[] = [
   { id: 'welcome', role: 'assistant', content: 'Hola, soy Qwen. Puedo ayudarte a explorar ideas, resumir textos o resolver problemas. ¿Qué te gustaría hacer hoy?', createdAt: 'Ahora' },
 ]
-const emptyUsage: Usage = { promptTokens: 0, completionTokens: 0, totalTokens: 0, requests: 0, latencyMs: 0, model: 'qwen/qwen3.6-27b' }
+const emptyUsage: Usage = { promptTokens: 0, completionTokens: 0, totalTokens: 0, requests: 0, latencyMs: 0, model: 'qwen/qwen3.8-27b' }
 const suggestions = ['Explícame cómo funciona la caché', 'Resume las novedades de Next.js', 'Ayúdame a estructurar una idea']
 
 function formatNumber(value: number) { return new Intl.NumberFormat('es-ES').format(value) }

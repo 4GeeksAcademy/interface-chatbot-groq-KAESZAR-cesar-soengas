@@ -10,7 +10,7 @@ Esta especificación recoge el brief y los requisitos de [context.md](context.md
 
 - Frontend en React/Next.js.
 - Proveedor de inferencia: [Groq](https://groq.com/), mediante su API externa.
-- Modelo solicitado en el brief: `qwen/qwen3.6-27b`. Su disponibilidad y acceso en el plan gratuito deben verificarse antes de integrar; no se sustituirá sin acordarlo.
+- Modelo confirmado: `qwen/qwen3.8-27b`, verificado como disponible en el plan gratuito de Groq.
 - Cuenta en [Groq Console](https://console.groq.com/) y credencial `GROQ_API_KEY` como variable de entorno exclusiva del servidor.
 - Las peticiones a Groq deben pasar por el servidor de Next.js. La clave no debe enviarse al navegador, persistirse con el historial ni incluirse en el repositorio.
 

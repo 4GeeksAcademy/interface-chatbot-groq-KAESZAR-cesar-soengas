@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
     const startedAt = performance.now()
     const result = await generateText({
-      model: groq('qwen/qwen3.6-27b'),
+      model: groq('qwen/qwen3.8-27b'),
       system: 'Eres un asistente útil, claro y conciso. Responde en español salvo que el usuario escriba en otro idioma.',
       messages: messages.map((message: { role: string; content: string }) => ({
         role: message.role as 'user' | 'assistant',
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     const usage = result.usage
     return NextResponse.json({
       text: result.text,
-      model: 'qwen/qwen3.6-27b',
+      model: 'qwen/qwen3.8-27b',
       latencyMs: Math.round(performance.now() - startedAt),
       usage: {
         promptTokens: usage.inputTokens ?? 0,

@@ -8,7 +8,7 @@ Construir un prototipo de interfaz de chat para que un cliente explore el uso in
 
 - **Interfaz:** React/Next.js.
 - **Proveedor de inferencia:** [Groq](https://groq.com/).
-- **Modelo solicitado:** `qwen/qwen3.6-27b`, disponible en el plan gratuito de Groq según el brief.
+- **Modelo:** `qwen/qwen3.8-27b`, confirmado como disponible en Groq tras verificar los modelos accesibles.
 - **Credenciales:** la API Key de Groq debe configurarse como variable de entorno; no debe exponerse en el frontend ni guardarse en el repositorio.
 
 ## Requisitos funcionales
