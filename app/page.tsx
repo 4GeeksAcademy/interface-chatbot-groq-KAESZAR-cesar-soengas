@@ -51,7 +51,15 @@ export default function Page() {
       const data = await response.json()
       if (!response.ok) throw new Error(data.error)
       setMessages((current) => [...current, { id: crypto.randomUUID(), role: 'assistant', content: data.text, createdAt: 'Ahora' }])
-      setUsage((current) => ({ ...current, ...data.usage, requests: current.requests + 1, latencyMs: current.latencyMs + data.latencyMs, model: data.model }))
+      setUsage((current) => ({
+        ...current,
+        promptTokens: current.promptTokens + (data.usage?.promptTokens ?? 0),
+        completionTokens: current.completionTokens + (data.usage?.completionTokens ?? 0),
+        totalTokens: current.totalTokens + (data.usage?.totalTokens ?? 0),
+        requests: current.requests + 1,
+        latencyMs: current.latencyMs + (data.latencyMs ?? 0),
+        model: data.model ?? current.model,
+      }))
     } catch (error) {
       setMessages((current) => [...current, { id: crypto.randomUUID(), role: 'assistant', content: error instanceof Error ? error.message : 'Ocurrió un error inesperado.', createdAt: 'Ahora' }])
     } finally { setIsLoading(false) }
