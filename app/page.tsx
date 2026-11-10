@@ -14,33 +14,29 @@ const suggestions = ['Explícame cómo funciona la caché', 'Resume las novedade
 
 function formatNumber(value: number) { return new Intl.NumberFormat('es-ES').format(value) }
 
-function loadMessages(): Message[] {
-  try {
-    const saved = window.localStorage.getItem('qwen-chat-messages')
-    if (saved) return JSON.parse(saved) as Message[]
-  } catch { /* ignorar datos corruptos */ }
-  return starterMessages
-}
-
-function loadUsage(): Usage {
-  try {
-    const saved = window.localStorage.getItem('qwen-chat-usage')
-    if (saved) return { ...emptyUsage, ...JSON.parse(saved) } as Usage
-  } catch { /* ignorar datos corruptos */ }
-  return emptyUsage
-}
-
 export default function Page() {
-  const [messages, setMessages] = useState<Message[]>(loadMessages())
-  const [usage, setUsage] = useState<Usage>(loadUsage())
+  const [messages, setMessages] = useState<Message[]>(starterMessages)
+  const [usage, setUsage] = useState<Usage>(emptyUsage)
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [copiedId, setCopiedId] = useState<string | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => { window.localStorage.setItem('qwen-chat-messages', JSON.stringify(messages)) }, [messages])
-  useEffect(() => { window.localStorage.setItem('qwen-chat-usage', JSON.stringify(usage)) }, [usage])
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    try {
+      const savedMessages = window.localStorage.getItem('qwen-chat-messages')
+      const savedUsage = window.localStorage.getItem('qwen-chat-usage')
+      if (savedMessages) setMessages(JSON.parse(savedMessages))
+      if (savedUsage) setUsage({ ...emptyUsage, ...JSON.parse(savedUsage) })
+    } catch { /* ignorar datos corruptos */ }
+    setReady(true)
+  }, [])
+
+  useEffect(() => { if (ready) window.localStorage.setItem('qwen-chat-messages', JSON.stringify(messages)) }, [messages, ready])
+  useEffect(() => { if (ready) window.localStorage.setItem('qwen-chat-usage', JSON.stringify(usage)) }, [usage, ready])
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages, isLoading])
 
   const tokenTotal = useMemo(() => usage.promptTokens + usage.completionTokens, [usage])
