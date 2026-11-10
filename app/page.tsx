@@ -65,7 +65,12 @@ export default function Page() {
     } finally { setIsLoading(false) }
   }
 
-  function clearConversation() { setMessages(starterMessages); setUsage(emptyUsage) }
+  function clearConversation() {
+    window.localStorage.removeItem('qwen-chat-messages')
+    window.localStorage.removeItem('qwen-chat-usage')
+    setMessages(starterMessages)
+    setUsage(emptyUsage)
+  }
   async function copyMessage(message: Message) { await navigator.clipboard.writeText(message.content); setCopiedId(message.id); window.setTimeout(() => setCopiedId(null), 1600) }
 
   return (
